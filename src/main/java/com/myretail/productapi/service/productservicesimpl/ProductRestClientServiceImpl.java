@@ -38,7 +38,7 @@ public class ProductRestClientServiceImpl implements ProductRestClientService {
             jsonObject = restTemplate.getForEntity(requestUrl, String.class);
             name = extractName(jsonObject.getBody());
         } catch (Exception e) {
-            logger.info("Unbake to fetch product name for product with id: " + productId + " from redsky API");
+            logger.info("Unable to fetch product name for product with id: " + productId + " from redsky API");
             throw new APIRequestException("Failed to fetch product name from https://redsky.target.com/v3/pdp/tcin. ", e);
         }
         logger.info("Successfully fetched product name for product with id: " + productId);

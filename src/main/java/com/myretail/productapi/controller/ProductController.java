@@ -16,9 +16,9 @@ public class ProductController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private final ProductService productService;
 
+    @Autowired
     public ProductController(@NonNull ProductService productService) {
         this.productService = productService;
     }
