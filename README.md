@@ -19,7 +19,7 @@ Build an application that performs the following actions:
 
 BONUS: Accepts an HTTP PUT request at the same path (/products/{id}), containing a JSON request body similar to the GET response, and updates the product’s price in the data store. 
 
-## Solution:
+## Implementation:
 
 ### Project Requirements:
 
@@ -100,7 +100,14 @@ ResponseBody:
 * Throws InvalidRequestParametersException if the request parameters for the PUT request are not valid.
 * Throws UpdatePriceException if failed to update the price of a product in the NoSQL store.
 
-### Exception Handlers
+### Exception Response Handlers
 Given the custom exception handling, I have also implemented exception response handlers that handle these exceptions 
 and respond with appropriate response codes and message details for the client/user.
 
+### Future Improvements
+* I would integrate better OAuth implementation so that any client can register himself/herself and generate a timed token for API access.
+* There are still some custom bad requests scenarios that can be handled more accurately to display appropriate message to the client.
+* Currently the API functions only if the collections and databases are created to retrieve the pricing information for a product. We could potentially 
+modify the code to create these entities if not already existing.
+* If we expect lot of incoming requests per second, for our system to scale well, we could remove the dependency on the redsky API and store the name information
+in the NoSQL itself. This will reduce the number of API calls.
