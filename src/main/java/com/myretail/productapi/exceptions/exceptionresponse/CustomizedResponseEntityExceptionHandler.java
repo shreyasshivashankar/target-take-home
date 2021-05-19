@@ -3,6 +3,7 @@ package com.myretail.productapi.exceptions.exceptionresponse;
 import java.util.Date;
 
 import com.myretail.productapi.exceptions.APIRequestException;
+import com.myretail.productapi.exceptions.AuthorizationException;
 import com.myretail.productapi.exceptions.InvalidRequestParametersException;
 import com.myretail.productapi.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,12 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public final ResponseEntity<ExceptionResponse> handleAuthorizationException(AuthorizationException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false),HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
     }
 }

@@ -82,6 +82,7 @@ public class ProductControllerTest {
         when(productRestClientService.getProductNameFromAPI(PRODUCT_ID)).thenReturn(PRODUCT_NAME);
         String productJson = "{\"id\": \"12345\",\"name\": \"test_name\",\"current_price\": {\"value\": \"99.99\",\"currency_code\": \"USD\"}}";
         this.mockMvc.perform(put("/products/" + PRODUCT_ID)
+                .header("access_token", "test_token_uid_encrypt")
                 .content(productJson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isOk());
@@ -90,6 +91,7 @@ public class ProductControllerTest {
     @Test
     public void testUpdatePriceNullProduct() throws Exception {
         this.mockMvc.perform(put("/products/" + PRODUCT_ID)
+                .header("access_token", "test_token_uid_encrypt")
                 .content("")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isBadRequest());
@@ -99,8 +101,19 @@ public class ProductControllerTest {
     public void testUpdatePriceIdMismatch() throws Exception {
         String productJson = "{\"id\": \"invalid\",\"name\": \"test_name\",\"current_price\": {\"value\": \"99.99\",\"currency_code\": \"USD\"}}";
         this.mockMvc.perform(put("/products/" + PRODUCT_ID)
+                .header("access_token", "test_token_uid_encrypt")
                 .content(productJson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isNotAcceptable());
+    }
+
+    @Test
+    public void testUpdatePriceUnauthorised() throws Exception {
+        String productJson = "{\"id\": \"invalid\",\"name\": \"test_name\",\"current_price\": {\"value\": \"99.99\",\"currency_code\": \"USD\"}}";
+        this.mockMvc.perform(put("/products/" + PRODUCT_ID)
+                .header("access_token", "")
+                .content(productJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isUnauthorized());
     }
 }

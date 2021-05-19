@@ -1,5 +1,6 @@
 package com.myretail.productapi.controller;
 
+import com.myretail.productapi.auth.RequiresToken;
 import com.myretail.productapi.dto.Product;
 import com.myretail.productapi.service.productservices.ProductService;
 import com.myretail.productapi.exceptions.APIRequestException;
@@ -29,6 +30,7 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
+    @RequiresToken
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public @ResponseBody
     Product updatePrice(@PathVariable String id, @RequestBody Product product) {
