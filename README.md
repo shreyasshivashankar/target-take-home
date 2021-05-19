@@ -100,7 +100,7 @@ ResponseBody:
 * Throws InvalidRequestParametersException if the request parameters for the PUT request are not valid.
 * Throws UpdatePriceException if failed to update the price of a product in the NoSQL store.
 
-### Exception Handlers
+### Exception Response Handlers
 Given the custom exception handling, I have also implemented exception response handlers that handle these exceptions 
 and respond with appropriate response codes and message details for the client/user.
 
