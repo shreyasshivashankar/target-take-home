@@ -5,7 +5,6 @@ import java.util.Date;
 import com.myretail.productapi.exceptions.APIRequestException;
 import com.myretail.productapi.exceptions.AuthorizationException;
 import com.myretail.productapi.exceptions.InvalidRequestParametersException;
-import com.myretail.productapi.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,13 +17,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(APIRequestException.class)
     public final ResponseEntity<ExceptionResponse> handleApiRequestException(APIRequestException ex, WebRequest request) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-                request.getDescription(false),HttpStatus.BAD_REQUEST.getReasonPhrase());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public final ResponseEntity<ExceptionResponse> handleProductNotFoundException(ProductNotFoundException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false),HttpStatus.BAD_REQUEST.getReasonPhrase());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);

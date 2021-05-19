@@ -1,7 +1,6 @@
 package com.myretail.productapi.service.productservices;
 
 import com.myretail.productapi.dto.Product;
-import com.myretail.productapi.exceptions.ProductNotFoundException;
 
 public interface ProductService {
     /**
@@ -9,9 +8,8 @@ public interface ProductService {
      *
      * @param productId id of the product.
      * @return product object.
-     * @throws ProductNotFoundException if no valid product is found
      */
-    Product getProduct(String productId) throws Exception;
+    Product getProduct(String productId);
 
     /**
      * Updates only the price of a given product.
