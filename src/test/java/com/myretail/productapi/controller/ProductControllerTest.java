@@ -38,8 +38,6 @@ public class ProductControllerTest {
     @MockBean
     private ProductRestClientService productRestClientService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     private static final String PRODUCT_ID = "12345";
     private static final String PRODUCT_NAME = "test_name";
     private static final Double PRICE_VALUE = 99.99;

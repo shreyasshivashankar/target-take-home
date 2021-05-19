@@ -1,4 +1,4 @@
-package com.myretail.productapi.dbclient.repositoryimpl;
+package com.myretail.productapi.dbclient.repository.repositoryimpl;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
