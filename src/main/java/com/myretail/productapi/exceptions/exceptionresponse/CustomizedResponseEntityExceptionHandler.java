@@ -1,11 +1,10 @@
-package com.myretail.productapi.controller.exceptionresponse;
+package com.myretail.productapi.exceptions.exceptionresponse;
 
 import java.util.Date;
 
-import com.myretail.productapi.service.serviceexceptions.APIRequestException;
-import com.myretail.productapi.service.serviceexceptions.InvalidRequestParametersException;
-import com.myretail.productapi.service.serviceexceptions.PriceNullException;
-import com.myretail.productapi.service.serviceexceptions.ProductNotFoundException;
+import com.myretail.productapi.exceptions.APIRequestException;
+import com.myretail.productapi.exceptions.InvalidRequestParametersException;
+import com.myretail.productapi.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,13 +17,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(APIRequestException.class)
     public final ResponseEntity<ExceptionResponse> handleApiRequestException(APIRequestException ex, WebRequest request) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-                request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
-    }
-
-    @ExceptionHandler(PriceNullException.class)
-    public final ResponseEntity<ExceptionResponse> handlePriceNullException(PriceNullException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);

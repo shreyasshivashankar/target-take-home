@@ -2,7 +2,7 @@ package com.myretail.productapi.controller;
 
 import com.myretail.productapi.dto.Product;
 import com.myretail.productapi.service.productservices.ProductService;
-import com.myretail.productapi.service.serviceexceptions.APIRequestException;
+import com.myretail.productapi.exceptions.APIRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

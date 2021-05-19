@@ -1,6 +1,6 @@
 package com.myretail.productapi.service.productservices;
 
-import com.myretail.productapi.service.serviceexceptions.APIRequestException;
+import com.myretail.productapi.exceptions.APIRequestException;
 
 /**
  * Service for fetching names of products.

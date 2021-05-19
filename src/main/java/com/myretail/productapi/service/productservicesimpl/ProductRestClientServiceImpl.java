@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.productapi.service.productservices.ProductRestClientService;
-import com.myretail.productapi.service.serviceexceptions.APIRequestException;
+import com.myretail.productapi.exceptions.APIRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +38,10 @@ public class ProductRestClientServiceImpl implements ProductRestClientService {
             jsonObject = restTemplate.getForEntity(requestUrl, String.class);
             name = extractName(jsonObject.getBody());
         } catch (Exception e) {
+            logger.info("Unbake to fetch product name for product with id: " + productId + " from redsky API");
             throw new APIRequestException("Failed to fetch product name from https://redsky.target.com/v3/pdp/tcin. ", e);
         }
+        logger.info("Successfully fetched product name for product with id: " + productId);
         return name;
     }
 

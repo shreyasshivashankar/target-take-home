@@ -12,12 +12,21 @@ public enum Currency {
 
     private final String code;
 
+    /**
+     * Constructor.
+     * @param code enum currency code.
+     */
     Currency(String code) {
         this.code = code;
     }
 
+    /**
+     * Getter method that returns the currency code.
+     * @return enum currency code.
+     */
     public String getCode() {
         return code;
     }
 
 }
+

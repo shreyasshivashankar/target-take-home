@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.myretail.productapi.dto.serialization.ProductSerializer;
-import com.myretail.productapi.service.serviceexceptions.InvalidRequestParametersException;
+import com.myretail.productapi.exceptions.InvalidRequestParametersException;
 
 import java.util.Objects;
 
@@ -107,6 +107,10 @@ public class Product {
         }
     }
 
+    /**
+     * Method to validate the populated member fields.
+     * @return validation result.
+     */
     public boolean validate() {
         if (id == null || !currentPrice.validate()) {
             throw new InvalidRequestParametersException("Invalid request parameters for product with id: " + id);

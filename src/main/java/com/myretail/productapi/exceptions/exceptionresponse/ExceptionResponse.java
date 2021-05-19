@@ -1,4 +1,4 @@
-package com.myretail.productapi.controller.exceptionresponse;
+package com.myretail.productapi.exceptions.exceptionresponse;
 
 import java.util.Date;
 

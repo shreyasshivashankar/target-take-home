@@ -1,4 +1,4 @@
-package com.myretail.productapi.service.serviceexceptions;
+package com.myretail.productapi.exceptions;
 
 /**
  * Custom exception that is thrown when the request parameters are invalid.

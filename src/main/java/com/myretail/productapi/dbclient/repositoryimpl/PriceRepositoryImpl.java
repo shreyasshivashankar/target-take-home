@@ -9,7 +9,7 @@ import com.mongodb.client.result.UpdateResult;
 import com.myretail.productapi.dbclient.repository.PriceRepository;
 import com.myretail.productapi.dto.Currency;
 import com.myretail.productapi.dto.Price;
-import com.myretail.productapi.service.serviceexceptions.PriceNullException;
+import com.myretail.productapi.exceptions.InvalidRequestParametersException;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +43,10 @@ public class PriceRepositoryImpl implements PriceRepository {
     private static final String VALUE_PROPERTY = "value";
     private static final String CURRENCY_PROPERTY = "currency_code";
 
+    /**
+     * Constructor.
+     * @param mongoClient mongodb client.
+     */
     public PriceRepositoryImpl(@NonNull MongoClient mongoClient) {
         this.mongoClient = mongoClient;
     }
@@ -60,8 +64,10 @@ public class PriceRepositoryImpl implements PriceRepository {
                     Currency.valueOf(priceDoc.getString(CURRENCY_PROPERTY)));
         }
         if (price == null) {
-            throw new PriceNullException("No pricing information available for product with id: " + productId);
+            logger.info("Failed to fetch pricing details for product with id: " + productId);
+            throw new InvalidRequestParametersException("No pricing information available for product with id: " + productId);
         }
+        logger.info("Successfully fetched pricing details for product with id: " + productId + ", Pricing details: " + price.toString());
         return price;
     }
 
@@ -73,16 +79,18 @@ public class PriceRepositoryImpl implements PriceRepository {
         UpdateResult result = collection.updateOne(eq(PRODUCT_ID_PROPERTY, productId),
                 new Document("$set", new Document(PRICE_PROPERTY, priceDoc)));
         if (result.getMatchedCount() == 0) {
+            logger.info("Inserted pricing details for product with id: " + productId + " Pricing details: " + price.toString());
             InsertOneResult resultInsert = collection.insertOne(new Document(PRICE_PROPERTY, priceDoc).append(PRODUCT_ID_PROPERTY, productId));
             return true;
         }
+        logger.info("Updated pricing details for product with id: " + productId + " Pricing details: " + price.toString());
         return true;
     }
 
     /**
      * helper method to fetch the product collection from the db.
      *
-     * @return the product collection
+     * @return the product collection.
      */
     private MongoCollection<Document> getCollection() {
         MongoDatabase db = mongoClient.getDatabase(dbName);

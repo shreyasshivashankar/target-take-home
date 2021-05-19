@@ -19,16 +19,29 @@ public class Price {
 
     private final Currency currencyCode;
 
+    /**
+     * Constructor to construct price pojo from JSON request parameters.
+     * @param value double price value.
+     * @param currency enum currency code.
+     */
     @JsonCreator
     public Price(@JsonProperty("value") Double value, @JsonProperty("currency_code") Currency currency) {
         this.value = value;
         this.currencyCode = currency;
     }
 
+    /**
+     * Getter method to get the price value.
+     * @return double price value.
+     */
     public Double getValue() {
         return value;
     }
 
+    /**
+     * Getter method to get the currency code.
+     * @return enum currency code.
+     */
     public Currency getCurrency() {
         return currencyCode;
     }
@@ -52,6 +65,10 @@ public class Price {
         return " value: " + value + ", currency_code=" + currencyCode;
     }
 
+    /**
+     * Method to validate the populated member fields.
+     * @return validation result.
+     */
     public boolean validate() {
         if (value == null || currencyCode == null) {
             return false;

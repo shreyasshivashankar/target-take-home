@@ -5,7 +5,7 @@ import com.myretail.productapi.dto.Price;
 import com.myretail.productapi.dto.Product;
 import com.myretail.productapi.service.productservices.ProductRestClientService;
 import com.myretail.productapi.service.productservices.ProductService;
-import com.myretail.productapi.service.serviceexceptions.UpdatePriceException;
+import com.myretail.productapi.exceptions.UpdatePriceException;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProduct(String productId) {
-        Price price = priceRepository.getProductPrice(productId);
-
         String productName = productRestClientService.getProductNameFromAPI(productId);
+
+        Price price = priceRepository.getProductPrice(productId);
 
         return new Product.Builder()
                 .id(productId)
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
         if (!updatePriceState) {
             throw new UpdatePriceException(String.format("Unable to update the price for product with ID: %s", product.getProductId()));
         }
-        return null;
+        return product;
     }
 
     @Override
