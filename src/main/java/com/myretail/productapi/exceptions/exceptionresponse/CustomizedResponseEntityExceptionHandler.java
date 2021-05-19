@@ -19,22 +19,22 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(APIRequestException.class)
     public final ResponseEntity<ExceptionResponse> handleApiRequestException(APIRequestException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-                request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
+                request.getDescription(false),HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleProductNotFoundException(ProductNotFoundException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-                request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
+                request.getDescription(false),HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidRequestParametersException.class)
     public final ResponseEntity<ExceptionResponse> handleInvalidRequestParametersException(InvalidRequestParametersException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-                request.getDescription(false),HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
+                request.getDescription(false),HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AuthorizationException.class)

@@ -65,7 +65,7 @@ public class ProductControllerTest {
     public void testGetProductNoPricingInformation() throws Exception {
         when(priceRepository.getProductPrice(PRODUCT_ID)).thenThrow(new InvalidRequestParametersException("No pricing information available for product with id: " + PRODUCT_ID));
 
-        this.mockMvc.perform(get("/products/" + PRODUCT_ID)).andDo(print()).andExpect(status().isNotAcceptable());
+        this.mockMvc.perform(get("/products/" + PRODUCT_ID)).andDo(print()).andExpect(status().isBadRequest());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ProductControllerTest {
         when(priceRepository.getProductPrice(PRODUCT_ID)).thenReturn(PRICE);
         when(productRestClientService.getProductNameFromAPI(PRODUCT_ID)).thenThrow(new APIRequestException("Failed to fetch product name from https://redsky.target.com/v3/pdp/tcin. ", null));
 
-        this.mockMvc.perform(get("/products/" + PRODUCT_ID)).andDo(print()).andExpect(status().isNotAcceptable());
+        this.mockMvc.perform(get("/products/" + PRODUCT_ID)).andDo(print()).andExpect(status().isBadRequest());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ProductControllerTest {
                 .header("access_token", "test_token_uid_encrypt")
                 .content(productJson)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print()).andExpect(status().isNotAcceptable());
+                .andDo(print()).andExpect(status().isBadRequest());
     }
 
     @Test
