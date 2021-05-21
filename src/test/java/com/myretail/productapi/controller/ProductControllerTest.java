@@ -1,6 +1,5 @@
 package com.myretail.productapi.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.productapi.dbclient.repository.PriceRepository;
 import com.myretail.productapi.dto.Currency;
 import com.myretail.productapi.dto.Price;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfiguration {
     @Bean
-    public FilterRegistrationBean masterOfTheUniverseFilterRegistration() {
+    public FilterRegistrationBean tokenFilterRegistration() {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new TokenValidityFilter());
